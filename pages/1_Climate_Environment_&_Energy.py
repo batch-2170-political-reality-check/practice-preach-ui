@@ -1,55 +1,58 @@
-# def main():
-#     print("Hello from practce-preach-ui!")
-
-
-# if __name__ == "__main__":
-#     main()
-
 import streamlit as st
+import datetime
+import requests
+
+st.set_page_config(
+    page_title="Practice What You Preach",
+    page_icon=":material/edit:",
+    layout='wide'
+    )
 
 '''
-# TaxiFareModel front
+# Practice What You Preach
 '''
 
-st.markdown('''
-Remember that there are several ways to output content into your web page...
 
-Either as with the title by just creating a string (or an f-string). Or as with this paragraph using the `st.` functions
-''')
 
-'''
-## Here we would like to add some controllers in order to ask the user to select the parameters of the ride
+# Initialize session state for managing views if not already set
+if 'current_view' not in st.session_state:
+    st.session_state.current_view = "menu"
 
-1. Let's ask for:
-- date and time
-- pickup longitude
-- pickup latitude
-- dropoff longitude
-- dropoff latitude
-- passenger count
-'''
+st.header("Select an Option")
 
-'''
-## Once we have these, let's call our API in order to retrieve a prediction
+st.write("Default time period is the current government cycle")
 
-See ? No need to load a `model.joblib` file in this app, we do not even need to know anything about Data Science in order to retrieve a prediction...
+col1, col2 = st.columns(2)
 
-🤔 How could we call our API ? Off course... The `requests` package 💡
-'''
+today = datetime.datetime.now()
+last_year = today.year - 1
 
-url = 'https://taxifare.lewagon.ai/predict'
+with col1:
+    start_date = st.date_input("When's your birthday", datetime.date(2025, 2, 23))
 
-if url == 'https://taxifare.lewagon.ai/predict':
+with col2:
+    end_date = st.date_input("When's your birthday", datetime.date(today.year,today.month,today.day))
 
-    st.markdown('Maybe you want to use your own API for the prediction, not the one provided by Le Wagon...')
+############################################################################
+st.divider()
 
-'''
+col3, col4 = st.columns(2)
 
-2. Let's build a dictionary containing the parameters for our API...
+with col3:
+    st.text_area("Party Summary",
+                 "The party advocates for regulated migration pathways through visa agreements and training partnerships for students, trainees, and skilled workers. They believe in human rights-based cooperation with third and transit countries, emphasizing that more regulated migration leads to less irregular migration. The goal is to effectively and long-term reduce irregular and dangerous migration to Europe by creating better local living conditions and implementing comprehensive migration agreements. They explicitly oppose outsourcing asylum procedures to third countries, citing cost and legal failures. The party also stresses the importance of distinguishing between flight and labor migration.",
+                 height=250
+                 )
 
-3. Let's call our API using the `requests` package...
+###########################################################################
 
-4. Let's retrieve the prediction from the **JSON** returned by the API...
+url = 'INSERT API URL HERE'
 
-## Finally, we can display the prediction to the user
-'''
+params = {
+    'start_date': start_date,
+    'end_date': end_date,
+
+}
+
+# response = requests.get(url, params=params).json()
+# fare = response['fare']

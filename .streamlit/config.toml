@@ -1,7 +1,7 @@
 [theme]
-primaryColor="#F63366"
+primaryColor="#f1cfd8ff"
 backgroundColor="#E7E1D7"
-secondaryBackgroundColor="#F63366"
+secondaryBackgroundColor="#f8d0dbff"
 textColor="#1B78DB"
 font="Neue Haas Grotesk Display"
 borderColor="#1B78DB"
@@ -12,7 +12,7 @@ borderColor="#1B78DB"
 # baseFontSize=16
 
 [theme.sidebar]
-primaryColor="#F63366"
+primaryColor="#ffe4ecff"
 backgroundColor="#ddf1ffff"
 #secondaryBackgroundColor="#1B78DB"
 textColor="#1B78DB"
