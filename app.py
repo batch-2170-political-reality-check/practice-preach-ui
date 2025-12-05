@@ -1,111 +1,131 @@
+from datetime import date, datetime
 import streamlit as st
-from datetime import datetime, date
 import requests
-# import bundestag_periods
+from constants import BUNDESTAG_WAHLPERIODE
+# from pages import page_1,page_2
 
 #################################### Page Configs   #########################################
 st.set_page_config(
     page_title="Practice What You Preach",
-    page_icon=":material/edit:",
+    page_icon="🦔",
     layout='wide'
     )
 
-topics = ["Climate","Digital","MettIgel"]
+# Reducing the margins at the top so
+st.markdown("""
+<style>
+header.stAppHeader {
+    background-color: transparent;
+}
+section.stMain .block-container {
+    padding-top: 0rem;
+    z-index: 1;
+}
+</style>""", unsafe_allow_html=True)
 
-# pg = st.navigation(topics)
-# pg.run()
 
-# pages = {
-#     "Bob": [
-#         st.Page("page_1.py", title="Create your account")
-#     ],
-#     "Carl": [
-#         st.Page("page_2.py", title="Learn about us")
-#     ],
+# ################################# API Call ##########################################
+
+url = 'https://rag-service-27wbaw4ioq-oe.a.run.app/parameters'
+
+# params = {
+#     'start_date': start_date,
+#     'end_date': end_date,
+#     'topic': topic,
+#     'party': party
+
 # }
 
-# pg = st.navigation(pages)
-# # pg.run()
+response = requests.get(url).json()
 
 
-################################### Main Page ##########################################
-st.markdown("<h1 style='text-align: center;'>Practice What You Preach</h1>", unsafe_allow_html=True)
-
-def function_for_tile_1():
-    st.session_state.current_view = "view_1"
-
-def function_for_tile_2():
-    st.session_state.current_view = "view_2"
-
-# Initialize session state for managing views if not already set
-if 'current_view' not in st.session_state:
-    st.session_state.current_view = "menu"
-
-st.header("Select an Option")
-
-col1, col2 = st.columns(2)
+topic = list(response['political_topics'].keys())
+for i in range(len(topic)):
+    topic[i] = topic[i].replace('_',' ')
+    if ' ' in topic[i]:
+        g = topic[i].split(' ')
+        for h in range(len(g)):
+            g[h] = g[h].capitalize()
+        topic[i] = ' '.join(g)
+    else:
+        topic[i] = topic[i].capitalize()
 
 
+topics = sorted(topic)
 
-with col1:
-    # Use a container or simply place a button to act as a "tile"
-    container_1 = st.container(border=True)
-    container_1.markdown(
-        "The party's platform emphasizes **urgent action on climate change**, recognizing it as a **significant threat to global security and economic stability**. They advocate for a **transition to renewable energy sources** and **investment in green technologies**. The party also supports **international cooperation** to address the climate crisis and calls for **stricter environmental regulations** to reduce greenhouse gas emissions. Furthermore, they propose **carbon pricing mechanisms** and **incentives for sustainable practices** across industries."
-        )
+#################################### Topic Navigation #########################################
 
-    # if st.button("Tile 1: Go to View 1", use_container_width=True):
-    #     function_for_tile_1()
+# topics = ["Climate","Digital","Mett Igel","Lederhosen","Bier","Deutsch Rap","Berlin","Ballern","Skifahrt","ß"]
 
-with col2:
-    st.write(
-        "The party's platform emphasizes **urgent action on climate change**, recognizing it as a **significant threat to global security and economic stability**. They advocate for a **transition to renewable energy sources** and **investment in green technologies**. The party also supports **international cooperation** to address the climate crisis and calls for **stricter environmental regulations** to reduce greenhouse gas emissions. Furthermore, they propose **carbon pricing mechanisms** and **incentives for sustainable practices** across industries."
-        )
+pages = [
+        st.Page("home.py", title="Home"),
+        st.Page("page_1.py", title=topics[0]),
+        st.Page("page_2.py", title= topics[1]),
+        st.Page("page_3.py", title= topics[2]),
+        st.Page("page_4.py", title= topics[3]),
+        st.Page("page_5.py", title= topics[4]),
+        st.Page("page_6.py", title= topics[5]),
+        st.Page("page_7.py", title= topics[6]),
+        st.Page("page_8.py", title= topics[7]),
+        st.Page("page_9.py", title= topics[8]),
+        st.Page("page_10.py", title= topics[9]),
+    ]
+
+# pages = [
+#         st.Page("app.py", title="Home"),
+#         st.Page(page_1, title=topics[0]),
+#         st.Page(page_2, title= topics[1]),
+#         st.Page(page_3.py, title= topics[2]),
+#         st.Page(page_4.py, title= topics[3]),
+#         st.Page(page_5.py, title= topics[4]),
+#         st.Page(page_6.py, title= topics[5]),
+#         st.Page(page_7.py, title= topics[6]),
+#         st.Page(page_8.py, title= topics[7]),
+#         st.Page(page_9.py, title= topics[8]),
+#         st.Page(page_10.py, title= topics[9]),
+#     ]
+
+# pg = st.navigation(pages, position='sidebar')
+# pg.run()
+
+# pages = [
+#         st.Page("page_1.py", title="Create your account"),
+#         st.Page("page_2.py", title="Learn about us")
+#     ]
 
 
-################################### Sidebar ##########################################
+pg = st.navigation(pages)
+pg.run()
+
+
+
+################################### Sidebar Dates ##########################################
 st.divider()
 
 st.sidebar.write("Choose a time period within Wahlperiode dates.")
-st.sidebar.write("Default time period is 1 Wahlperiode")
 
-bundestag_periods = {
-    1:  (date(1949, 9, 7),  date(1953, 10, 6)),
-    2:  (date(1953, 10, 6), date(1957, 10, 15)),
-    3:  (date(1957, 10, 15), date(1961, 10, 17)),
-    4:  (date(1961, 10, 17), date(1965, 10, 19)),
-    5:  (date(1965, 10, 19), date(1969, 10, 20)),
-    6:  (date(1969, 10, 20), date(1972, 12, 13)),
-    7:  (date(1972, 12, 13), date(1976, 12, 13)),
-    8:  (date(1976, 12, 13), date(1980, 11, 4)),
-    9:  (date(1980, 11, 4), date(1983, 3, 29)),
-    10: (date(1983, 3, 29), date(1987, 2, 18)),
-    11: (date(1987, 2, 18), date(1990, 12, 20)),
-    12: (date(1990, 12, 20), date(1994, 11, 10)),
-    13: (date(1994, 11, 10), date(1998, 10, 26)),
-    14: (date(1998, 10, 26), date(2002, 10, 17)),
-    15: (date(2002, 10, 17), date(2005, 10, 18)),
-    16: (date(2005, 10, 18), date(2009, 10, 27)),
-    17: (date(2009, 10, 27), date(2013, 10, 22)),
-    18: (date(2013, 10, 22), date(2017, 10, 24)),
-    19: (date(2017, 10, 24), date(2021, 10, 26)),
-    20: (date(2021, 10, 26), date(2025, 3, 22)),
-    21: (date(2025, 3, 23), date.today())  # still ongoing
-}
+bundestag_periods = response['bundestag_wahlperiode']
+
+def string_to_date(s: str) -> datetime:
+    return datetime.strptime(s, "%Y-%m-%d").date()
 
 today = date.today()
 
-selected_start_date = st.sidebar.date_input("Start date",
-                                   date(2025, 2, 1),
-                                   min_value = date(1949, 9, 7),
-                                   max_value = today
-                                   )
+colS,colE = st.sidebar.columns(2)
 
-selected_end_date = st.sidebar.date_input("End date",
-                                 date.today(),
-                                 max_value=today,
-                                 min_value= date(1949, 9, 7)
-                                 )
+with colS:
+    selected_start_date = colS.date_input("Start date",
+                                    date(2025, 3, 23),
+                                    min_value = date(1949, 9, 7),
+                                    max_value = today
+                                    )
+
+with colE:
+    selected_end_date = colE.date_input("End date",
+                                    date.today(),
+                                    max_value=today,
+                                    min_value= date(1949, 9, 7)
+                                    )
 if selected_end_date < selected_start_date:
     st.sidebar.write(
         "Invalid selection, showing current Wahlperiode!"
@@ -119,11 +139,12 @@ final_end_date = today
 # date_2 = bundestag_periods.get(21)[1]
 
 for period in bundestag_periods:
-    date_1 = bundestag_periods.get(period)[0]
-    date_2 = bundestag_periods.get(period)[1]
+    date_1 = string_to_date(s= (bundestag_periods.get(period)[0]))
+    date_2 = string_to_date(s= (bundestag_periods.get(period)[1]))
+
     if date_1 <= selected_start_date <= date_2:
         if date_1 <= selected_end_date <= date_2:
-            if selected_end_date > selected_start_date:
+            if selected_end_date >= selected_start_date:
                 final_start_date = selected_start_date
                 final_end_date = selected_end_date
         else:
@@ -131,9 +152,16 @@ for period in bundestag_periods:
                 "Invalid selection, current Wahlperiode showing :) "
             )
 
-
 st.write(
     final_start_date, final_end_date
 )
 
 st.write("Comparing speeches from:", final_start_date, 'to', final_end_date)
+
+# if 'final_start_date' not in st.session_state:
+#     st.session_state.final_start_date = final_start_date
+
+# if 'final_end_date' not in st.session_state:
+#     st.session_state.final_end_date = final_end_date
+st.session_state.final_start_date = final_start_date
+st.session_state.final_end_date = final_end_date

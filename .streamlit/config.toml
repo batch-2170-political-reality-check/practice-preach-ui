@@ -3,8 +3,9 @@ primaryColor="#f1cfd8ff"
 backgroundColor="#E7E1D7"
 secondaryBackgroundColor="#f8d0dbff"
 textColor="#1B78DB"
-font="Neue Haas Grotesk Display"
+font="Optima"
 borderColor="#1B78DB"
+
 
 # For code fonts:
 # font="\"Space Mono\":100,400,700|Nunito"
@@ -16,5 +17,6 @@ primaryColor="#ffe4ecff"
 backgroundColor="#ddf1ffff"
 #secondaryBackgroundColor="#1B78DB"
 textColor="#1B78DB"
-font="Neue Haas Grotesk Display"
+font="Optima"
 borderColor="#1B78DB"
+#showSidebarBorder = True
