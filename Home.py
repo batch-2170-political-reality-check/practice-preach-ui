@@ -1,12 +1,7 @@
 from datetime import date
 import streamlit as st
 import requests
-# from constants import BUNDESTAG_WAHLPERIODE
-from app import pg
 import pandas as pd
-
-
-
 
 #################################### Page Configs   #########################################
 st.set_page_config(
@@ -31,14 +26,6 @@ section.stMain .block-container {
 # ################################# API Call ##########################################
 
 url = 'https://rag-service-27wbaw4ioq-oe.a.run.app/parameters'
-
-# params = {
-#     'start_date': start_date,
-#     'end_date': end_date,
-#     'topic': topic,
-#     'party': party
-
-# }
 
 response = requests.get(url).json()
 

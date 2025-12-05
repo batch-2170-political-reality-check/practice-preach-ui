@@ -1,8 +1,7 @@
 from datetime import date, datetime
 import streamlit as st
 import requests
-from constants import BUNDESTAG_WAHLPERIODE
-# from pages import page_1,page_2
+
 
 #################################### Page Configs   #########################################
 st.set_page_config(
