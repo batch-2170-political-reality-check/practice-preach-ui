@@ -9,6 +9,7 @@ st.set_page_config(
     layout='wide'
     )
 
+
 # Reducing the margins at the top so
 st.markdown("""
 <style>

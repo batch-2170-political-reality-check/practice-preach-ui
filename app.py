@@ -46,7 +46,7 @@ topics = sorted(topic)
 #################################### Topic Navigation #########################
 
 pages = [
-        st.Page("Home.py", title="Home"),
+        st.Page("home.py", title="Home"),
         st.Page("page_1.py", title=topics[0]),
         st.Page("page_2.py", title= topics[1]),
         st.Page("page_3.py", title= topics[2]),
