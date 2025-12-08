@@ -26,14 +26,6 @@ section.stMain .block-container {
 
 url = 'https://rag-service-27wbaw4ioq-oe.a.run.app/parameters'
 
-# params = {
-#     'start_date': start_date,
-#     'end_date': end_date,
-#     'topic': topic,
-#     'party': party
-
-# }
-
 response = requests.get(url).json()
 
 
@@ -54,7 +46,7 @@ topics = sorted(topic)
 #################################### Topic Navigation #########################
 
 pages = [
-        # st.Page("home.py", title="Home"),
+        st.Page("Home.py", title="Home"),
         st.Page("page_1.py", title=topics[0]),
         st.Page("page_2.py", title= topics[1]),
         st.Page("page_3.py", title= topics[2]),
