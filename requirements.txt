@@ -2,3 +2,4 @@ streamlit
 datetime
 requests
 pandas
+python

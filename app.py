@@ -22,7 +22,6 @@ section.stMain .block-container {
 }
 </style>""", unsafe_allow_html=True)
 
-
 # ################################# API Call ##########################################
 
 url = 'https://rag-service-27wbaw4ioq-oe.a.run.app/parameters'
@@ -52,9 +51,7 @@ for i in range(len(topic)):
 
 topics = sorted(topic)
 
-#################################### Topic Navigation #########################################
-
-# topics = ["Climate","Digital","Mett Igel","Lederhosen","Bier","Deutsch Rap","Berlin","Ballern","Skifahrt","ß"]
+#################################### Topic Navigation #########################
 
 pages = [
         st.Page("home.py", title="Home"),
@@ -70,35 +67,10 @@ pages = [
         st.Page("page_10.py", title= topics[9]),
     ]
 
-# pages = [
-#         st.Page("app.py", title="Home"),
-#         st.Page(page_1, title=topics[0]),
-#         st.Page(page_2, title= topics[1]),
-#         st.Page(page_3.py, title= topics[2]),
-#         st.Page(page_4.py, title= topics[3]),
-#         st.Page(page_5.py, title= topics[4]),
-#         st.Page(page_6.py, title= topics[5]),
-#         st.Page(page_7.py, title= topics[6]),
-#         st.Page(page_8.py, title= topics[7]),
-#         st.Page(page_9.py, title= topics[8]),
-#         st.Page(page_10.py, title= topics[9]),
-#     ]
-
-# pg = st.navigation(pages, position='sidebar')
-# pg.run()
-
-# pages = [
-#         st.Page("page_1.py", title="Create your account"),
-#         st.Page("page_2.py", title="Learn about us")
-#     ]
-
-
 pg = st.navigation(pages)
 pg.run()
 
-
-
-################################### Sidebar Dates ##########################################
+################################### Sidebar Dates ##########################
 st.divider()
 
 st.sidebar.write("Choose a time period within Wahlperiode dates.")
@@ -134,8 +106,6 @@ wahl_start = date(2025, 3, 23)
 final_start_date = wahl_start
 final_end_date = today
 
-# st.write(bundestag_periods.get(21))
-# date_2 = bundestag_periods.get(21)[1]
 
 for period in bundestag_periods:
     date_1 = string_to_date(s= (bundestag_periods.get(period)[0]))
@@ -151,16 +121,7 @@ for period in bundestag_periods:
                 "Invalid selection, current Wahlperiode showing :) "
             )
 
-st.write(
-    final_start_date, final_end_date
-)
-
 st.write("Comparing speeches from:", final_start_date, 'to', final_end_date)
 
-# if 'final_start_date' not in st.session_state:
-#     st.session_state.final_start_date = final_start_date
-
-# if 'final_end_date' not in st.session_state:
-#     st.session_state.final_end_date = final_end_date
 st.session_state.final_start_date = final_start_date
 st.session_state.final_end_date = final_end_date

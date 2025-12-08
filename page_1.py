@@ -49,13 +49,13 @@ section.stMain .block-container {
 
 if 'final_start_date' in st.session_state:
     final_start_date = st.session_state.final_start_date
-    # st.write(f"The date passed from the main app is: **{final_start_date}**")
+    st.write(f"The date passed from the main app is: **{final_start_date}**")
 else:
     final_start_date = date(2025,3,23)
 
 if 'final_end_date' in st.session_state:
     final_end_date = st.session_state.final_end_date
-    # st.write(f"The date passed from the main app is: **{final_end_date}**")
+    st.write(f"The date passed from the main app is: **{final_end_date}**")
 else:
     final_end_date = date(2025,3,23)
 
