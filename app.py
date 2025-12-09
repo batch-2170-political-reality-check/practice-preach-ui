@@ -2,6 +2,7 @@ from datetime import date, datetime
 import streamlit as st
 import requests
 
+from params import API_URL
 
 #################################### Page Configs   #########################################
 st.set_page_config(
@@ -24,7 +25,7 @@ section.stMain .block-container {
 
 # ################################# API Call ##########################################
 
-url = 'https://rag-service-27wbaw4ioq-oe.a.run.app/parameters'
+url = f"{API_URL}/parameters"
 
 response = requests.get(url).json()
 
