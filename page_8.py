@@ -3,11 +3,10 @@ import streamlit as st
 import requests
 # from PIL import Image
 
+from params import API_URL
+
 # ################################# Topic API Call ##########################################
-
-url = 'https://rag-service-27wbaw4ioq-oe.a.run.app/parameters'
-
-response = requests.get(url).json()
+response = requests.get(f"{API_URL}/parameters").json()
 
 topic_list = list(response['political_topics'].keys())
 for i in range(len(topic_list)):
@@ -58,15 +57,13 @@ else:
 # ################################# Speech API Call ##########################################
 
 with st.spinner("Hold your :horse: :horse: :horse:...", show_time=True):
-    url2 = "https://rag-service-27wbaw4ioq-oe.a.run.app/summaries?topic={topic}&start_date={final_start_date}&end_date={final_end_date}"
-
     params = {
         'start_date': final_start_date,
         'end_date': final_end_date,
         'topic': topic_q,
     }
 
-    response2 = requests.get(url2,params=params).json()
+    response2 = requests.get(f"{API_URL}/summaries",params=params).json()
 
 ################################### Main Page ##########################################
 st.markdown(f"""<h1 style='text-align: center;'> {topic} </h1>""", unsafe_allow_html=True)

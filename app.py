@@ -46,6 +46,10 @@ topics = sorted(topic)
 
 #################################### Topic Navigation #########################
 
+# FIXME So… we went for a st.navigation and don't want drop-downs. But
+# st.navigation takes pages which don't take any query-params... I tried to use
+# https://docs.streamlit.io/develop/api-reference/widgets/st.page_link, but
+# that didn't fit into a navigation...
 pages = [
         st.Page("Home.py", title="Home"),
         st.Page("page_1.py", title=topics[0]),
