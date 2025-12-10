@@ -2,6 +2,8 @@ import streamlit as st
 import requests
 import pandas as pd
 
+from params import API_URL
+
 #################################### Page Configs   #########################################
 st.set_page_config(
     page_title="Practice What You Preach",
@@ -25,9 +27,7 @@ section.stMain .block-container {
 
 # ################################# API Call ##########################################
 
-url = 'https://rag-service-27wbaw4ioq-oe.a.run.app/parameters'
-
-response = requests.get(url).json()
+response = requests.get(f"{API_URL}/parameters").json()
 
 ################################### Main Page ##########################################
 st.write(
