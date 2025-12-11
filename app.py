@@ -118,6 +118,9 @@ for period in bundestag_periods:
                 "Invalid selection, current Wahlperiode showing :) "
             )
 
+if final_end_date >= date(2025, 12, 11):
+    final_end_date = date(2025,12,10)
+
 st.write("Comparing speeches from:", final_start_date, 'to', final_end_date)
 
 st.session_state.final_start_date = final_start_date
