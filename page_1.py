@@ -2,7 +2,7 @@ from datetime import date
 import streamlit as st
 import requests
 
-from params import API_URL
+from params import *
 
 
 
@@ -60,15 +60,20 @@ else:
 
 # ################################# Speech API Call ##########################################
 
+# import logging, http.client as http_client
+# http_client.HTTPConnection.debuglevel = 0
+# for name in ("mlflow", "urllib3", "requests"):
+#     logging.getLogger(name).setLevel(logging.DEBUG)
+#     logging.getLogger(name).addHandler(logging.StreamHandler())
+
 with st.spinner("Hold your :horse: :horse: :horse:...", show_time=True):
     params = {
-        'start_date': final_start_date,
-        'end_date': final_end_date,
+        'start_date': date2str(final_start_date),
+        'end_date': date2str(final_end_date),
         'topic': topic_q,
     }
 
     response2 = requests.get(f"{API_URL}/summaries", params=params).json()
-
 
 ################################### Main Page ##########################################
 st.markdown(f"""<h1 style='text-align: center;'> {topic} </h1>""", unsafe_allow_html=True)

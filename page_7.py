@@ -3,7 +3,7 @@ import streamlit as st
 import requests
 # from PIL import Image
 
-from params import API_URL
+from params import *
 
 # ################################# Topic API Call ##########################################
 response = requests.get(f"{API_URL}/parameters").json()
@@ -58,8 +58,8 @@ else:
 
 with st.spinner("Hold your :horse: :horse: :horse:...", show_time=True):
     params = {
-        'start_date': final_start_date,
-        'end_date': final_end_date,
+        'start_date': date2str(final_start_date),
+        'end_date': date2str(final_end_date),
         'topic': topic_q,
     }
 

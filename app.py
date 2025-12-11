@@ -2,7 +2,7 @@ from datetime import date, datetime
 import streamlit as st
 import requests
 
-from params import API_URL
+from params import *
 
 #################################### Page Configs   #########################################
 st.set_page_config(
